@@ -15,4 +15,4 @@ class App:
     def run(self):
         #print('here')
         print(App.client_net.CLIENT_ID)
-        App.window.run(App.client_net.CLIENT_ID, App.client_net)
+        App.window.run(App.client_net)

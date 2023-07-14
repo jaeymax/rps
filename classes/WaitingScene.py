@@ -26,11 +26,16 @@ class WaitingScene(Sc):
 
      def update(self, **kwargs):
          if kwargs.get("player"):
-            self.waiting_for_opponent_text.show = True
-            self.unable_to_connect_text.show = False
-            self.connecting_text.show = False
+            game = kwargs.get("game")
+            if game.ready:
+                pass
+            else:
+                self.waiting_for_opponent_text.show = True
+                self.unable_to_connect_text.show = False
+                self.connecting_text.show = False
          else:
              self.unable_to_connect_text.show = True
              self.connecting_text.show = True         
+
          pygame.display.flip()
 

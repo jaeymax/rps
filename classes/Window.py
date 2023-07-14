@@ -31,9 +31,14 @@ class Window:
         Window.CURRENT_SCENE.init()
     
     @staticmethod
-    def run(player:str|None, client_network:ClientNetwork):   
+    def run(client_network:ClientNetwork):   
+        game = None
+        player = ClientNetwork.getId()
         while True:
             Window.CLOCK.tick(Window.FRAME_RATE)
+            
+            if player:
+                game = client_network.send('get-game')
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -43,14 +48,18 @@ class Window:
                     Window.changeScene(PlayingScene(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.PLAYING_SCREEN_BACKGROUND))
 
 
-            
             if isinstance(Window.CURRENT_SCENE, WaitingScene):
-                pass
+                if game and game.ready:
+                    Window.changeScene(PlayingScene(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.PLAYING_SCREEN_BACKGROUND))
    
 
             Window.draw()
-            Window.update(player=player)
+            Window.update(player=player, game = game)
        
+
+    @staticmethod
+    def check_for_event():
+        pass
 
     @staticmethod        
     def draw():
