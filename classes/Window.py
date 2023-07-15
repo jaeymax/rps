@@ -5,9 +5,7 @@ from .Scene import Scene
 from .WaitingScene import WaitingScene
 from .PlayingScene import PlayingScene
 from .ClientNetwork import ClientNetwork
-from .TextManager import StaticText, BlinkableText, AnimatedText
 
-#from .PlayingScene import PlayingScene
 
 class Window:
     CLOCK:pygame.time.Clock = pygame.time.Clock()
@@ -38,23 +36,33 @@ class Window:
             Window.CLOCK.tick(Window.FRAME_RATE)
             
             if player:
-                game = client_network.send('get-game')
+                try:
+                    game = client_network.send('get-game')
+                except:
+                    print("couln't get game")    
+
+            else:
+                player = ClientNetwork.connect_to_server()
+                if player:
+                    game = client_network.send('get-game')
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
             
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
-                    Window.changeScene(PlayingScene(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.PLAYING_SCREEN_BACKGROUND))
-
-
+            
             if isinstance(Window.CURRENT_SCENE, WaitingScene):
                 if game and game.ready:
                     Window.changeScene(PlayingScene(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.PLAYING_SCREEN_BACKGROUND))
+
+
+            elif isinstance(Window.CURRENT_SCENE, PlayingScene):
+                pass
+
    
 
             Window.draw()
-            Window.update(player=player, game = game)
+            Window.update(player=player, game = game, client_network=client_network)
        
 
     @staticmethod

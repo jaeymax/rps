@@ -21,7 +21,7 @@ class Button(Clickable):
 
 class RPSBUTTON(Button):
     
-    def __init__(self, size:tuple[int,int], position: tuple[int, int], image_url: str, tag_name:str) -> None:
+    def __init__(self, size:tuple[int,int], position: tuple[int, int], image_url: str, tag_name:str, highlighted_color:str) -> None:
         self.size = size
         self.image = pygame.transform.scale(pygame.image.load(image_url).convert_alpha(), self.size)
         self.tag_name = tag_name
@@ -29,12 +29,16 @@ class RPSBUTTON(Button):
         self.image_rect.x = position[0]
         self.image_rect.y = position[1]
         self.highlighted = False
+        self.selected = False
+        self.highlighted_color = highlighted_color
 
 
     def draw(self, surface: pygame.Surface):
         surface.blit(self.image, self.image_rect)
         if self.highlighted:
-            pygame.draw.rect(surface, (255,0,0), self.image_rect, 5, 15, 15, 15, 15)
+            pygame.draw.rect(surface, self.highlighted_color, self.image_rect, 5, 15, 15, 15, 15)
+        if self.selected:
+            pygame.draw.rect(surface, self.highlighted_color, self.image_rect, 5, 15, 15, 15, 15)
     
     def update(self):
         self.highlighted = True if self.image_rect.collidepoint(pygame.mouse.get_pos()) else False

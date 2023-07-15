@@ -6,7 +6,7 @@ class Text:
     def __init__(self, position:tuple[int,int], color:pygame.Color, size:int, name:str, text:str) -> None:
         pygame.font.init()
         self.size = size
-        self.font = pygame.font.SysFont(name, self.size)
+        self.font = pygame.font.SysFont(name, self.size, False, True)
         self.font_image = self.font.render(text, 1, color, None)
         self.font_rect = self.font_image.get_rect()
         self.font_rect.x, self.font_rect.y = position
