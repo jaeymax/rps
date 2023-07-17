@@ -2,15 +2,15 @@ from .Scene import Scene
 from .Button import NormalButton
 from .Constants import Constants
 from .Game import Game
+from .TextManager import BlinkableText
 import pygame
 
 class GameOverScene(Scene):
     
     def __init__(self, width, height, background_image_url):
         super().__init__(width, height, background_image_url)
-        self.play_again_button = NormalButton(Constants.PLAY_AGAIN_BUTTON_DIMENSION, Constants.PLAY_AGAIN_BUTTON_COLOR,Constants.PLAY_AGAIN_BUTTON_TEXT_COLOR,Constants.PLAY_AGAIN_BUTTON_TEXT, Constants.PLAY_AGAIN_BUTTON_TEXT_SIZE) 
-        self.play_again_button.show = True
-        self.play_again_button.text.show = True
+        self.play_again_text = BlinkableText(Constants.PLAY_AGAIN_TEXT_POSITION, Constants.PLAY_AGAIN_TEXT_COLOR, Constants.PLAY_AGAIN_TEXT_SIZE, Constants.PLAY_AGAIN_TEXT_NAME, Constants.PLAY_AGAIN_TEXT)
+        self.play_again_text.show = True
         self.background_image = background_image_url
 
     def init(self, player:str, game:Game):
@@ -26,10 +26,10 @@ class GameOverScene(Scene):
 
     def draw(self):
         self.surface.blit(self.background_image, (0, 0))
-        self.play_again_button.draw(self.surface)
+        self.play_again_text.render(self.surface)
 
     def update(self, **kwargs):
         player = int(kwargs.get('player'))
         game = kwargs.get('game')
-        self.play_again_button.update()
+        self.play_again_text.update()
         pygame.display.update()

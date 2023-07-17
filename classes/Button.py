@@ -32,7 +32,7 @@ class RPSBUTTON(Button):
         self.highlighted = False
         self.selected = False
         self.last_clicked_time = None
-        self.clicked_speed_time = 5000
+        self.clicked_speed_time = 3000
         self.highlighted_color = highlighted_color
 
 

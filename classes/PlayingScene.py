@@ -28,7 +28,7 @@ class PlayingScene(Sc):
 
 
     def init(self, player, game):
-        self.score_text = StaticText(Constants.SCORE_TEXT_POSITION, Constants.SCORE_TEXT_COLOR, Constants.SCORE_TEXT_SIZE, Constants.SCORE_TEXT_FONT, f'YOU SCORE: {self.get_score(player, game)}')
+        self.score_text = StaticText(Constants.SCORE_TEXT_POSITION, Constants.SCORE_TEXT_COLOR, Constants.SCORE_TEXT_SIZE, Constants.SCORE_TEXT_FONT, f'YOUR SCORE: {self.get_score(player, game)}')
         self.opponent_score_text = StaticText(Constants.OPPONENT_SCORE_TEXT_POSITION, Constants.OPPONENT_SCORE_TEXT_COLOR, Constants.OPPONENT_SCORE_TEXT_SIZE, Constants.OPPONENT_SCORE_TEXT_FONT, f"OPPONENT: {self.get_opponent_score(player, game)}")
         self.score_text.show = True
         self.opponent_score_text.show = True
@@ -45,7 +45,8 @@ class PlayingScene(Sc):
 
     def draw(self):
         #self.surface.blit(self.background_image, (0, 0))
-        self.surface.fill((255, 184, 198))
+        #self.surface.fill((255, 184, 198))
+        self.surface.fill((173, 216, 230))
         self.rock_button.draw(self.surface)
         self.scissor_button.draw(self.surface)
         self.paper_button.draw(self.surface)  
@@ -161,7 +162,7 @@ class PlayingScene(Sc):
                     self.locked_in_text.show = False    
 
     def update_scores_text(self, player, game):
-        self.score_text = StaticText(Constants.SCORE_TEXT_POSITION, Constants.SCORE_TEXT_COLOR, Constants.SCORE_TEXT_SIZE, Constants.SCORE_TEXT_FONT, f'YOU SCORE: {self.get_score(player, game)}')
+        self.score_text = StaticText(Constants.SCORE_TEXT_POSITION, Constants.SCORE_TEXT_COLOR, Constants.SCORE_TEXT_SIZE, Constants.SCORE_TEXT_FONT, f'YOUR SCORE: {self.get_score(player, game)}')
         self.opponent_score_text = StaticText(Constants.OPPONENT_SCORE_TEXT_POSITION, Constants.OPPONENT_SCORE_TEXT_COLOR, Constants.OPPONENT_SCORE_TEXT_SIZE, Constants.OPPONENT_SCORE_TEXT_FONT, f"OPPONENT: {self.get_opponent_score(player, game)}")
         self.score_text.show = True
         self.opponent_score_text.show = True

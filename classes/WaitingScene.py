@@ -6,8 +6,8 @@ class WaitingScene(Sc):
      def __init__(self, width, height, background_image_url):
           super().__init__(width, height, background_image_url)
           self.init()
-          self.unable_to_connect_text = StaticText((100, 100), (0,0,0),60, 'comicsans', "Coudn't connet to server")
-          self.connecting_text = AnimatedText((100, 600),(0,0,0), 40,'comicsans','Connecting.','Connecting..','Connecting...')
+          self.unable_to_connect_text = StaticText((70, 100), (0,0,0),60, 'comicsans', "Coudn't connet to server")
+          self.connecting_text = AnimatedText((250, 600),(0,0,0), 40,'comicsans','Connecting.','Connecting..','Connecting...')
           self.waiting_for_opponent_text = BlinkableText((100,100),(0,0,0),60, 'comicsans', 'Waiting for Opponent')
           
 

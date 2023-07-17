@@ -56,6 +56,10 @@ class Window:
                 if event.type == pygame.QUIT:
                     sys.exit()
 
+                
+                if event.type == pygame.KEYDOWN and isinstance(Window.CURRENT_SCENE, GameOverScene):
+                    client_network.send(f'ready {player}')
+                    Window.changeScene(WaitingScene(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.WAITING_SCREEN_BACKGROUND), player, game)
 
             if isinstance(Window.CURRENT_SCENE, WaitingScene):
                 if game and game.ready():
@@ -73,10 +77,10 @@ class Window:
                      Window.changeScene(GameOverScene(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, None), player, game)
                     #Window.CURRENT_SCENE.
                     #client_network.send('reset moves')
-            elif isinstance(Window.CURRENT_SCENE, GameOverScene):
-                if Window.CURRENT_SCENE.play_again_button.clicked(pygame.mouse.get_pos()):
-                    client_network.send(f'ready {player}')
-                    Window.changeScene(WaitingScene(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.WAITING_SCREEN_BACKGROUND), player, game)
+            #elif isinstance(Window.CURRENT_SCENE, GameOverScene):
+             #   if Window.CURRENT_SCENE.play_again_text.clicked(pygame.mouse.get_pos()):
+              #      client_network.send(f'ready {player}')
+               #     Window.changeScene(WaitingScene(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.WAITING_SCREEN_BACKGROUND), player, game)
 
     @staticmethod
     def check_for_event():

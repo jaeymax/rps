@@ -83,7 +83,7 @@ def threaded_client(newConnection, client_id:int, game_id:int, lk:Lock):
     try:
         del games[game_id]
     except:
-        print('Game was deleted')
+        print('Game was already deleted')
 
 lock = Lock()
 
