@@ -11,7 +11,7 @@ class WaitingScene(Sc):
           self.waiting_for_opponent_text = BlinkableText((100,100),(0,0,0),60, 'comicsans', 'Waiting for Opponent')
           
 
-     def init(self):
+     def init(self, *args):
          pass
          
      def draw(self):
@@ -27,7 +27,7 @@ class WaitingScene(Sc):
      def update(self, **kwargs):
          if kwargs.get("player"):
             game = kwargs.get("game")
-            if game.ready:
+            if game.ready():
                 pass
             else:
                 self.waiting_for_opponent_text.show = True

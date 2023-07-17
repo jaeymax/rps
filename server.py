@@ -1,6 +1,6 @@
 import socket
 import pickle
-from threading import Thread
+from threading import Thread,Lock
 import sys
 from classes.Game import Game
 
@@ -22,32 +22,54 @@ id_count:int = 0
 games:dict = {}
 
 
-def threaded_client(newConnection, client_id:int, game_id:int):
+def threaded_client(newConnection, client_id:int, game_id:int, lk:Lock):
     global id_count
     newConnection.send(str.encode(str(client_id)))
     
     while 1:
         try:
              #print('waiting for data')
+             #lk.acquire()
              data = newConnection.recv(4098).decode('utf-8')
-
+             
              if not data:
                 print('no data recieved')
                 break
-             
-             game:Game = games[game_id]   
+             game:Game = games.get(game_id)   
              if data == 'get-game':
                  pass
-             if data == 'R' or data == 'S' or data == 'P':
+             elif data == 'ROCK' or data == 'SCISSOR' or data == 'PAPER':
                 if client_id == 1:
                     game.player1_move = data
                     game.player1_moved = True
                 else:
                     game.player2_move = data
-                    game.player2_moved = True
-             
-
+                    game.player2_moved = True       
+             elif data == 'update 1':
+                 games[game_id].player1_score += 1
+                 #if games[game_id].player1_score == Constants.MAX_SCORE:
+                  #   game[game_id].ready = False
+             elif data == 'update 2':
+                 games[game_id].player2_score += 1
+                 #if games[game_id].player2_score == Constants.MAX_SCORE:
+                  #   game[game_id].ready = False
+             elif data == 'reset moves':
+                 game.reset_moves()
+                # lock.acquire()
+             elif data == 'game over':
+                 games[game_id].player1_ready = False
+                 games[game_id].player2_ready = False
+             elif data == 'ready 1':
+                 game.player1_ready = True
+                 if game.player2_ready:
+                     game.reset_game()
+             elif data == 'ready 2':
+                 game.player2_ready = True
+                 if game.player1_ready:
+                        game.reset_game()
+                 #lock.release()
              newConnection.sendall(pickle.dumps(game))
+             #lk.release()
              #print(data)
              #print('after data')
         except socket.error as e:
@@ -58,7 +80,12 @@ def threaded_client(newConnection, client_id:int, game_id:int):
     print('Lost connection')
     print(f'player {client_id} is disconnected')
     id_count -= 1
+    try:
+        del games[game_id]
+    except:
+        print('Game was deleted')
 
+lock = Lock()
 
 while True:
     newConnection, address = SERVER_SOCKET.accept()
@@ -69,8 +96,8 @@ while True:
     if id_count % 2 == 1:
         games[game_id] = Game(game_id)
     else:
-        games[game_id].ready = True
+        games[game_id].player2_ready = True
         player = 2
     
-    newClient:Thread = Thread(target=threaded_client, args = [newConnection, player, game_id])
+    newClient:Thread = Thread(target=threaded_client, args = [newConnection, player, game_id, lock])
     newClient.start()

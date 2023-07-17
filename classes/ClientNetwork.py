@@ -19,8 +19,10 @@ class ClientNetwork:
         try:
             ClientNetwork.CLIENT_SOCKET.send(str.encode(data))
         except socket.error as e:
-            print(e)    
-        return pickle.loads(ClientNetwork.CLIENT_SOCKET.recv(4098))
+            print(e)   
+            print("Coudn't send data to the server") 
+        else:
+            return pickle.loads(ClientNetwork.CLIENT_SOCKET.recv(4098*20))
     
 
     @staticmethod
@@ -28,7 +30,7 @@ class ClientNetwork:
         id = None
         try:
             ClientNetwork.CLIENT_SOCKET.connect((ClientNetwork.SERVER_IP, ClientNetwork.SERVER_PORT))
-            id = ClientNetwork.CLIENT_SOCKET.recv(4082).decode('utf-8')
+            id = ClientNetwork.CLIENT_SOCKET.recv(4098*20).decode('utf-8')
         except socket.error as e:
             print('Unable to connect to server')
         else:

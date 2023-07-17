@@ -9,9 +9,12 @@ class Constants:
     BLUE = (0, 0, 255)
     WAITING_SCREEN_BACKGROUND = os.path.abspath('./images/waiting-scene.jpg')
     PLAYING_SCREEN_BACKGROUND = os.path.abspath('./images/playing-scene1.jpg')
+    WIN_BACKGROUND_IMAGE = os.path.abspath('images/win.jpg')
+    LOSE_BACKGROUND_IMAGE = os.path.abspath('images/lose.jpeg')
     ROCK_BUTTON_IMAGE = os.path.abspath('./images/rock.png')
     PAPER_BUTTON_IMAGE = os.path.abspath('./images/paper.png')
     SCISSOR_BUTTON_IMAGE = os.path.abspath('./images/scissor.png')
+    MAX_SCORE = 1
     RPS_BUTTON_SIZE = (100, 100)
     ROCK_BUTTON_POSITION = (100, 500)
     PAPER_BUTTON_POSITION = (500, 500)
@@ -19,14 +22,64 @@ class Constants:
     ROCK_BUTTON_HIGHLIGHTED_COLOR = (0,255, 255)
     SCISSOR_BUTTON_HIGHLIGHTED_COLOR = (255, 255, 0)
     PAPER_BUTTON_HIGHLIGHTED_COLOR = (255, 0, 0)
+    PLAY_AGAIN_BUTTON_DIMENSION = (200, 200, 100, 50)
+    PLAY_AGAIN_BUTTON_COLOR = (0, 0, 0)
+    PLAY_AGAIN_BUTTON_TEXT_COLOR = (255, 255, 255)
+    PLAY_AGAIN_BUTTON_TEXT = 'PLAY AGAIN'
+    PLAY_AGAIN_BUTTON_TEXT_SIZE = 20
+    #
     LOCKED_IN_TEXT_POSITION = (455,400)
+    LOCKED_IN_TEXT_COLOR = (100, 0, 0)
+    LOCKED_IN_TEXT_SIZE = 30
+    LOCKED_IN_TEXT_FONT = 'comicsans'
+    LOCKED_IN_TEXT_LABEL = 'LOCKED IN'
+    #
     PLAY_TEXT_POSITION = (80,400)
-    OPPONENT_WAITING_TEXT_POSITION = (470,400)
-    MOVE_TEXT_POSITION = (80,400)
-    LOCKED_IN_TEXT_COLOR = (255, 0, 0)
     PLAY_TEXT_COLOR = (255, 255, 255)
+    PLAY_TEXT_SIZE = 30
+    PLAY_TEXT_FONT = 'comicsans'
+    PLAY_TEXT_LABLE = 'PLAY'
+    #
+    OPPONENT_MOVE_TEXT_POSITION = (470, 400)
+    OPPONENT_MOVE_TEXT_COLOR = (0,0,0)
+    OPPONENT_MOVE_TEXT_SIZE = 30
+    OPPONENT_MOVE_TEXT_FONT = 'comicsans'
+    #
+    OPPONENT_WAITING_TEXT_POSITION = (470,400)
+    OPPONENT_WAITING_TEXT_COLOR = (250, 250, 250)
+    OPPONENT_WAITING_TEXT_SIZE = 30
+    OPPONENT_WAITING_TEXT_FONT = 'comicsans'
+    OPPONENT_WAITING_TEXT_LABEL = 'WAITING'
+    #
+    MOVE_TEXT_POSITION = (80,400)
     MOVE_TEXT_COLOR = (0, 0, 0)
-    OPPONENT_WAITING_TEXT_COLOR = (0,0,0)
+    MOVE_TEXT_SIZE = 30
+    MOVE_TEXT_FONT = 'comicsans'
+    #
+    
+    SCORE_TEXT_POSITION = (80, 100)
+    SCORE_TEXT_COLOR = (0, 0, 0)
+    SCORE_TEXT_SIZE = 30
+    SCORE_TEXT_FONT = 'comicsans'
+
+    #
+    OPPONENT_SCORE_TEXT_POSITION = (470, 100)
+    OPPONENT_SCORE_TEXT_COLOR = (0,0,0)
+    OPPONENT_SCORE_TEXT_SIZE = 30
+    OPPONENT_SCORE_TEXT_FONT = 'comicsans'
+
+    #
+    WIN_OR_LOSE_TEXT_POSITION = (200, 200)
+    WIN_OR_LOSE_TEXT_SIZE = 60
+    WIN_OR_LOST_TEXT_FONT = 'comicsans'
+    WIN_TEXT_LABLE = 'YOU WON!'
+    LOST_TEXT_LABLE = 'YOU LOST!'
+    TIE_TEXT_LABLE = 'TIE GAME!'
+    
+
+    WIN_COLOR = (255, 255, 255)
+    LOSE_COLOR = (100, 0, 0)
+    TIE_COLOR = (255, 255, 255)
     GAME_SOUND = os.path.abspath('./audio/game-sound.ogg')
 
    
